@@ -11,16 +11,16 @@ jobs:
                       python-version: 3.6
                     - os: macos-latest
                       python-version: 3.7
-       runs-on: ${{ matrix.os }}
-       steps:
-           - uses: actions/checkout@v2
-           - name: Set up Python ${{ matrix.python-version }}
-             uses: actions/setup-python@v2
-             with:
-                 python-version: ${{ matrix.python-version }}
-           - name: Install
-             run: |
-                 python --version
-                 python -m pip install --upgrade pip setuptools wheel
-                 python -m pip install --ignore-installed --no-cache-dir .
-                 python -m pip list
+        runs-on: ${{ matrix.os }}
+        steps:
+            - uses: actions/checkout@v2
+            - name: Set up Python ${{ matrix.python-version }}
+              uses: actions/setup-python@v2
+              with:
+                  python-version: ${{ matrix.python-version }}
+            - name: Install
+              run: |
+                  python --version
+                  python -m pip install --upgrade pip setuptools wheel
+                  python -m pip install --ignore-installed --no-cache-dir .
+                  python -m pip list
