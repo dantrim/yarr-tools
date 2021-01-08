@@ -5,14 +5,14 @@ from setuptools import setup, find_packages
 HERE = pathlib.Path(__file__).parent
 
 # the text of the README file
-README = (HERE / "README.rst").read_text()
+README = (HERE / "README.md").read_text()
 
 setup(
     name="yarr-tools",
     version="1.0.0",
     description="Utilities for interacting with the YARR DAQ software",
     long_description=README,
-    long_description_content_type="text/x-rst",
+    long_description_content_type="text/markdown",
     url="https://github.com/dantrim/yarr-tools",
     author="Daniel Joseph Antrim",
     author_email="dantrim1023@gmail.com",
