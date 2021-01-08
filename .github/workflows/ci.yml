@@ -24,3 +24,6 @@ jobs:
                   python -m pip install --upgrade pip setuptools wheel
                   python -m pip install --ignore-installed --no-cache-dir .
                   python -m pip list
+            - name: Run Tests
+              run: |
+                  pytest tests/ -vvv
