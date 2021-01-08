@@ -25,6 +25,6 @@ setup(
     package_dir={"": "src"},
     packages=find_packages(where="src"),
     include_package_data=True,
-    install_requires=["numpy", "click", "matplotlib"],
+    install_requires=["numpy", "click", "matplotlib", "typing"],
     entry_points={"console_scripts": []},
 )
