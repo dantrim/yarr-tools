@@ -8,7 +8,7 @@ HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
 
 setup(
-    name="yarr-tools",
+    name="yarr_tools",
     version="1.0.0",
     description="Utilities for interacting with the YARR DAQ software",
     long_description=README,
@@ -25,6 +25,6 @@ setup(
     package_dir={"": "src"},
     packages=find_packages(where="src"),
     include_package_data=True,
-    install_requires=["numpy", "click", "matplotlib", "typing"],
+    install_requires=["numpy", "click", "matplotlib", "typing", "pytest"],
     entry_points={"console_scripts": []},
 )

@@ -1,4 +1,4 @@
-from utils import retriever
+from yarr_tools.utils import retriever
 
 from argparse import ArgumentParser
 import sys

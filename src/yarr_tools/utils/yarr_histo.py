@@ -12,6 +12,16 @@ class YarrHisto1d:
 
         # need to check shape
         self._histogram = data
+        self._name = ""
+        self._overflow = 0.0
+        self._underflow = 0.0
+        self._type = "Histo2d"
+        self._x_label = ""
+        self._x_n_bins = 0
+        self._x_low_edge = 0
+        self._x_high_edge = 0
+        self._y_label = ""
+
         if metadata:
             # need to add support for jsonschema
             self._name = metadata["Name"]
@@ -78,19 +88,73 @@ class YarrHisto1d:
     def y_label(self, val):
         self._y_label = val
 
+    def __add__(self, other):
+        if isinstance(other, YarrHisto1d):
+            assert (
+                self._histogram.shape == other.histogram.shape
+            ), f"Histograms must have the same shape (self = {self._histogram.shape}, other = {other.histogram.shape})"
+            self._histogram += other.histogram
+        else:
+            assert isinstance(other, (int, float))
+            self._histogram += other
+        return self
+
+    def __iadd__(self, other):
+        self.__add__(other)
+        return self
+
+    def __sub__(self, other):
+        if isinstance(other, YarrHisto1d):
+            assert (
+                self._histogram.shape == other.histogram.shape
+            ), f"Histograms must have the same shape (self = {self._histogram.shape}, other = {other.histogram.shape})"
+            self._histogram -= other.histogram
+        else:
+            assert isinstance(other, (int, float))
+            self._histogram -= other
+        return self
+
+    def __isub__(self, other):
+        self.__sub__(other)
+        return self
+
+    def __mul__(self, other):
+        assert isinstance(
+            other, (int, float)
+        ), "Can only multiple histogram by a number!"
+        self._histogram *= other
+        return self
+
+    def __imul__(self, other):
+        self.__mul__(other)
+        return self
+
 
 class YarrHisto2d:
     def __init__(self, data: np.array, metadata: json = {}) -> None:
 
         # need to check shape
         self._histogram = data
+        self._name = ""
+        self._overflow = 0.0
+        self._underflow = 0.0
+        self._type = "Histo2d"
+        self._x_label = ""
+        self._x_n_bins = 0
+        self._x_low_edge = 0
+        self._x_high_edge = 0
+        self._y_label = ""
+        self._y_n_bins = 0
+        self._y_low_edge = 0
+        self._y_high_edge = 0
+        self._z_label = ""
 
         # need to add support for jsonschema
         if metadata:
             self._name = metadata["Name"]
             self._overflow = metadata["Overflow"]
             self._underflow = metadata["Underflow"]
-            self._type = metadata["Type"]
+            assert self._type == metadata["Type"]
 
             self._x_label = metadata["x"]["AxisTitle"]
             self._x_n_bins = metadata["x"]["Bins"]
@@ -179,3 +243,44 @@ class YarrHisto2d:
     @y_high_edge.setter
     def y_high_edge(self, val):
         self._y_high_edge = val
+
+    def __add__(self, other):
+        if isinstance(other, YarrHisto2d):
+            assert (
+                self._histogram.shape == other.histogram.shape
+            ), f"Histograms must have the same shape (self = {self._histogram.shape}, other = {other.histogram.shape})"
+            self._histogram += other.histogram
+        else:
+            assert isinstance(other, (int, float))
+            self._histogram += other
+        return self
+
+    def __iadd__(self, other):
+        self.__add__(other)
+        return self
+
+    def __sub__(self, other):
+        if isinstance(other, YarrHisto2d):
+            assert (
+                self._histogram.shape == other.histogram.shape
+            ), f"Histograms must have the same shape (self = {self._histogram.shape}, other = {other.histogram.shape})"
+            self._histogram -= other.histogram
+        else:
+            assert isinstance(other, (int, float))
+            self._histogram -= other
+        return self
+
+    def __isub__(self, other):
+        self.__sub__(other)
+        return self
+
+    def __mul__(self, other):
+        assert isinstance(
+            other, (int, float)
+        ), "Can only multiple histogram by a number!"
+        self._histogram *= other
+        return self
+
+    def __imul__(self, other):
+        self.__mul__(other)
+        return self
