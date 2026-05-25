@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 def from_yarr(
-    input_file: Union[dict, str, Path]
+    input_file: Union[dict, str, Path],
 ) -> Union[YarrHisto1d, YarrHisto2d, None]:
 
     if isinstance(input_file, str) or isinstance(input_file, Path):
